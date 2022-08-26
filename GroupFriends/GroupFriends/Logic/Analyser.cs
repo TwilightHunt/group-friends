@@ -11,7 +11,7 @@ namespace GroupFriends.Logic
         public void Analyse(string id)
         {
             var members = vk.GetGroupMembers(id);
-            Find find;
+            Find find = delegate { };
 
             Console.WriteLine("What to check: 0 - city, 1 - gender, 2 - birth date");
             int num = int.Parse(Console.ReadLine());
@@ -28,10 +28,8 @@ namespace GroupFriends.Logic
                     find = FindByBirthDate;
                     break;
                 default:
-                    find = delegate
-                    {
-                        Console.WriteLine("Wrong Operation");
-                    };                   
+                    Console.WriteLine("Wrong Operation");
+                    Environment.Exit(0);
                     break;
             }
 
@@ -52,8 +50,8 @@ namespace GroupFriends.Logic
         }
         private void FindByGender(User user)
         {
-                if (CheckMembers(user.Sex.ToString(), Sex.Female.ToString()))
-                    Console.WriteLine($"https://vk.com/{user.Domain}");
+            if (CheckMembers(user.Sex.ToString(), Sex.Female.ToString()))
+                Console.WriteLine($"https://vk.com/{user.Domain}");
         }
         private void FindByBirthDate(User user)
         {
@@ -65,7 +63,7 @@ namespace GroupFriends.Logic
 
                 if (CheckMembers(date, "2004"))
                     Console.WriteLine($"https://vk.com/{user.Domain}");
-            }           
+            }
         }
     }
 }
