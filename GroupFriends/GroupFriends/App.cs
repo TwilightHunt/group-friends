@@ -7,6 +7,7 @@ namespace GroupFriends
         static void Main(string[] args)
         {
             GroupFriends groupFriends = new GroupFriends();
+            groupFriends.Start();
         }
     }
 }

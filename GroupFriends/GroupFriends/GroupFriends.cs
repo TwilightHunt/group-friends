@@ -1,11 +1,7 @@
 ﻿using GroupFriends.ConfigTypes;
 using GroupFriends.System;
+using GroupFriends.UI;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GroupFriends
 {
@@ -26,12 +22,19 @@ namespace GroupFriends
                 var raw = File.ReadAllText(CONFIG_NAME);
                 _config = JsonConvert.DeserializeObject<AppConfig>(raw);
                 Storage.Set("SYSTEM_CONFIG", _config);
-            } else
+            }
+            else
             {
                 _config = new AppConfig();
                 string raw = JsonConvert.SerializeObject(_config);
                 File.WriteAllText(CONFIG_NAME, raw);
             }
+        }
+
+        public void Start()
+        {
+            var ui = new UIHandler();
+            ui.Analyse();
         }
     }
 }
