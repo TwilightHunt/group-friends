@@ -1,7 +1,8 @@
 ﻿using GroupFriends.ConfigTypes;
-using GroupFriends.System;
 using GroupFriends.UI;
 using Newtonsoft.Json;
+using TwilightHunt.Shared.Emitter;
+using TwilightHunt.Shared.System;
 
 namespace GroupFriends
 {
@@ -33,8 +34,13 @@ namespace GroupFriends
 
         public void Start()
         {
+            BridgeEmitter bridge = new BridgeEmitter();
+            Storage.Set("EMITTER", bridge);
+            bridge.Subscribe("Message", (args) => { Console.WriteLine($"[Class: GroupFriends] " + JsonConvert.SerializeObject(args)); });
+
             var ui = new UIHandler();
             ui.Analyse();
+            bridge.Emit("Message", "Program is working hard");
         }
     }
 }

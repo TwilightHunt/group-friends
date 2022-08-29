@@ -16,6 +16,7 @@ namespace GroupFriends.UI
             string id = Console.ReadLine();
 
             var analyser = new Analyser();
+            analyser.SetAnalyser();
             analyser.Analyse(id);
         }
 
