@@ -24,9 +24,9 @@ namespace GroupFriends.Handlers
         public Group? GetGroupInfo(string id) =>
              Api.Groups.GetById(null, id, GroupsFields.All).FirstOrDefault();
 
-        public ReadOnlyCollection<User> GetGroupMembers(string id, long offset = 0)
+        public ReadOnlyCollection<User> GetGroupMembers(string id, long offset = 0, long count = 100)
         {
-            return Api.Groups.GetMembers(new GroupsGetMembersParams() { GroupId = id, Fields = UsersFields.All, Count = 10, Offset = offset });
+            return Api.Groups.GetMembers(new GroupsGetMembersParams() { GroupId = id, Fields = UsersFields.All, Offset = offset, Count = count });
         }
     }
 }

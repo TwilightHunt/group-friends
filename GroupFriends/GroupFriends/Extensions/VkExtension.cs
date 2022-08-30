@@ -10,7 +10,7 @@ namespace GroupFriends.Extensions
     {
         public static IEnumerable<ReadOnlyCollection<User>> GetAllGroupMembers(this VkHandler vk, string id)
         {
-            long to_load = 20;
+            long to_load = 100;
             long loaded = to_load;
             var loaded_members = vk.GetGroupMembers(id);
             var total = Convert.ToInt64(vk.GetGroupInfo(id).MembersCount);

@@ -34,13 +34,8 @@ namespace GroupFriends
 
         public void Start()
         {
-            BridgeEmitter bridge = new BridgeEmitter();
-            Storage.Set("EMITTER", bridge);
-            bridge.Subscribe("Message", (args) => { Console.WriteLine($"[Class: GroupFriends] " + JsonConvert.SerializeObject(args)); });
-
             var ui = new UIHandler();
             ui.Analyse();
-            bridge.Emit("Message", "Program is working hard");
         }
     }
 }
