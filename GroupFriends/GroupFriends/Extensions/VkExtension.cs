@@ -21,6 +21,5 @@ namespace GroupFriends.Extensions
                 yield return vk.GetGroupMembers(id, loaded);
             }
         }
-
     }
 }

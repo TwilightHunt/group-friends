@@ -1,4 +1,5 @@
 ﻿using GroupFriends.ConfigTypes;
+using GroupFriends.Logic;
 using System.Collections.ObjectModel;
 using TwilightHunt.Shared.System;
 using VkNet;
@@ -26,7 +27,15 @@ namespace GroupFriends.Handlers
 
         public ReadOnlyCollection<User> GetGroupMembers(string id, long offset = 0, long count = 100)
         {
-            return Api.Groups.GetMembers(new GroupsGetMembersParams() { GroupId = id, Fields = UsersFields.All, Offset = offset, Count = count });
+            try { return Api.Groups.GetMembers(new GroupsGetMembersParams() 
+            { 
+                GroupId = id, 
+                Fields = UsersFields.All, 
+                Offset = offset, 
+                Count = count }); 
+            }
+            catch { Console.WriteLine("Invalid syntax"); Environment.Exit(0); }
+            return null;
         }
     }
 }
